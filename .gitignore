@@ -1,0 +1,16 @@
+# datasets
+data/*.csv
+
+# environment variables
+.env
+
+# python virtual environment
+.venv/
+venv/
+
+# python cache
+__pycache__/
+*.pyc
+
+# system files
+.DS_Store
