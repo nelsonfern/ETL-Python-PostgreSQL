@@ -18,7 +18,9 @@ def transform_data(tables: dict) -> pd.DataFrame:
     df_departments_clean['location'] = df_departments_clean['location'].fillna('Unknown')
 
     df_salaries_clean = df_salaries.dropna(subset=['salary_id', 'employee_id', 'base_salary'])
-    df_salaries_clean['bonus_percentage'] = df_salaries_clean['bonus_percentage'].fillna(0)
+    #cambiar el valor de bonus_percentage a entre 0 y 1, si es mayor a 1, dividirlo por 100
+    df_salaries_clean['bonus_percentage'] = df_salaries_clean['bonus_percentage'].apply(lambda x: x/100 if x > 1 else x)
+    df_salaries_clean['bonus_percentage'] = df_salaries_clean['bonus_percentage'].fillna(0).astype(float)
 
     # Transformación de datos
     df_employees_clean['birth_date'] = pd.to_datetime(df_employees_clean['birth_date'], errors='coerce')
